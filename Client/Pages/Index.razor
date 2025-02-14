@@ -4,11 +4,21 @@
 @inject HttpClient Http
 
 @code {
-    private List<Song> songs;
+    private List<Song> songs = new();
+    private string? errorMessage;
 
     protected override async Task OnInitializedAsync()
     {
-        songs = await Http.GetFromJsonAsync<List<Song>>("api/songs");
+        try
+        {
+            songs = await Http.GetFromJsonAsync<List<Song>>("api/songs") ?? new List<Song>();
+            errorMessage = null;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error loading songs: {ex.Message}";
+            songs = new List<Song>();
+        }
     }
 }
 

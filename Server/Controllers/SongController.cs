@@ -8,11 +8,11 @@ namespace music_manager_starter.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SongsController : ControllerBase
+    public class SongController : ControllerBase
     {
         private readonly DataDbContext _context;
 
-        public SongsController(DataDbContext context)
+        public SongController(DataDbContext context)
         {
             _context = context;
         }
